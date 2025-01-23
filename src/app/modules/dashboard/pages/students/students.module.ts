@@ -11,8 +11,11 @@ import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatTableModule } from '@angular/material/table';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+
 
 import { ReactiveFormsModule } from '@angular/forms';
+import { SharedModule } from '../../../../shared/shared.module';
 
 @NgModule({
   declarations: [StudentsComponent],
@@ -25,7 +28,9 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatIconModule,
     MatGridListModule,
     ReactiveFormsModule,
-    MatTableModule
+    MatCheckboxModule,
+    MatTableModule,
+    SharedModule,
   ],
   exports:[StudentsComponent],
 })

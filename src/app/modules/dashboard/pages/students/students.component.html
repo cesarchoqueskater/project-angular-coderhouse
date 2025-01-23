@@ -1,55 +1,91 @@
-<h1>Estudiantes</h1>
-<form (ngSubmit)="onSubmit()"  [formGroup]="studentForm">
-    <div class="grid">
-        <div class="col-6">
+
+<h1 appFontsize>Students</h1>
+
+<!--<h1 *appMultiply="5" >Estudiantes</h1>-->
+
+<!--<h1 appHighlight="green">Estudiantes</h1>-->
+
+<form (ngSubmit)="onSubmit()" [formGroup]="studentForm">
+    <div class="grid" style="width:400px">
+        <div class="col-12">
             <mat-form-field class="w-full" appearance="outline">
-                <mat-label>Nombre</mat-label>
-                <input matInput formControlName="name" placeholder="Placeholder">
-                <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
-                <mat-hint>Hint</mat-hint>
+                <mat-label appFontsize>Name</mat-label>
+                <input matInput formControlName="name" appFontsize placeholder="Enter Name">
+                <mat-icon matSuffix>person</mat-icon>
+                <mat-hint></mat-hint>
             </mat-form-field>
         </div>
-        <div class="col-6">
+        <div class="col-12">
             <mat-form-field class="w-full" appearance="outline">
-                <mat-label>Apellido</mat-label>
-                <input matInput formControlName="lastName" placeholder="Placeholder">
-                <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
-                <mat-hint>Hint</mat-hint>
+                <mat-label appFontsize >LastName</mat-label>
+                <input matInput formControlName="lastName"  appFontsize placeholder="Enter LastName">
+                <mat-icon matSuffix>family_restroom</mat-icon>
+                <mat-hint></mat-hint>
             </mat-form-field>
+        </div>
+        <div class="col-12">
+            <mat-form-field class="w-full" appearance="outline">
+                <mat-label appFontsize >Age</mat-label>
+                <input matInput type="number" formControlName="age"  appFontsize placeholder="Enter age">
+                <mat-icon matSuffix>schedule</mat-icon>
+                <mat-hint></mat-hint>
+                <mat-error *ngIf="ageValidation?.hasError('max')">{{ getErrorMessage() }}</mat-error>
+            </mat-form-field>
+        </div>
+        <div class="col-12">
+            <!--
+                <mat-form-field class="w-full" appearance="outline">
+                    <mat-label>Active</mat-label>
+                    <input matInput formControlName="active" placeholder="Placeholder">
+                    <mat-icon matSuffix>flag</mat-icon>
+                    <mat-hint>Hint</mat-hint>
+                </mat-form-field>
+            -->
+            <mat-checkbox class="example-margin" formControlName="active" appFontsize>Student Active</mat-checkbox>
         </div>
     </div>
           <div class="col-6">
-              <button type="submit" mat-flat-button>Guardar</button>
+              <button appFontsize type="submit" mat-flat-button>Guardar</button>
           </div>
 </form>
 
-
+<!--
 <pre>
     {{ students | json }}
 </pre>
-
+-->
 
 <table mat-table [dataSource]="students" class="mat-elevation-z8">
   
     <ng-container matColumnDef="id">
-        <th mat-header-cell *matHeaderCellDef> Id </th>
-        <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+        <th mat-header-cell *matHeaderCellDef appFontsize> Id </th>
+        <td mat-cell *matCellDef="let element" appFontsize> {{element.id}} </td>
       </ng-container>
 
-    <ng-container matColumnDef="name">
-      <th mat-header-cell *matHeaderCellDef> Name </th>
-      <td mat-cell *matCellDef="let element"> {{element.name}} </td>
-    </ng-container>
-  
     <ng-container matColumnDef="lastName">
-      <th mat-header-cell *matHeaderCellDef> Apellido </th>
-      <td mat-cell *matCellDef="let element"> {{element.lastName}} </td>
+      <th mat-header-cell *matHeaderCellDef appFontsize> FullName </th>
+      <!--<td (colorUpdate)="onColorUpdated()" appHighlight mat-cell *matCellDef="let element"> {{element | fullName }} </td>-->
+      <td mat-cell *matCellDef="let element" appFontsize> {{element | fullName }} </td>
     </ng-container>
+
+    <ng-container matColumnDef="age">
+        <th mat-header-cell *matHeaderCellDef appFontsize> Age </th>
+        <td mat-cell *matCellDef="let element" appFontsize> {{element.age }} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="active">
+        <th mat-header-cell *matHeaderCellDef appFontsize> Active </th>
+        <td mat-cell *matCellDef="let element">  
+            <mat-checkbox class="example-margin" [checked]='element.active' disabled></mat-checkbox></td>
+      </ng-container>
 
     <ng-container matColumnDef="actions">
-        <th mat-header-cell *matHeaderCellDef> Acciones </th>
-        <td mat-cell *matCellDef="let element"><button (click)="onDelete(element.id)" mat-icon-button> <mat-icon>delete</mat-icon> </button></td>
-      </ng-container>
+        <th mat-header-cell *matHeaderCellDef appFontsize> Actions </th>
+        <td mat-cell *matCellDef="let element">
+            <button (click)="onDelete(element.id)" mat-icon-button> <mat-icon>edit_note</mat-icon> </button>
+            <button (click)="onDelete(element.id)" mat-icon-button> <mat-icon>delete</mat-icon> </button>
+        </td>
+    </ng-container>
 
   
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
