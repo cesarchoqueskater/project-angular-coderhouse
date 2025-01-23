@@ -28,6 +28,9 @@ export class StudentsComponent {
   displayedColumns: string[] = ['id', 'lastName', 'age', 'active','actions'];
   dataSource = [];
 
+  editingStudentId : string | null = null;
+
+
   constructor( private fb: FormBuilder ){
     this.studentForm = this.fb.group({
       name: [null, [Validators.required]],
@@ -55,13 +58,23 @@ export class StudentsComponent {
     }else{
       console.log(this.studentForm.value);
 
-      this.students = [
-        ...this.students,
-        {
-          id : generateRandomString(6),
-          ...this.studentForm.value
-        }
-      ];
+      if (!!this.editingStudentId){
+        this.students = this.students.map( (student) => 
+          student.id === this.editingStudentId 
+          ? { ...student, ...this.studentForm.value} 
+          : student
+        );
+
+        this.editingStudentId = null
+      }else{
+        this.students = [
+          ...this.students,
+          {
+            id : generateRandomString(6),
+            ...this.studentForm.value
+          }
+        ];
+      }
 
       this.studentForm.reset();
       /*
@@ -85,6 +98,16 @@ export class StudentsComponent {
 
   onFontSize(){
     console.log("Se modifico el tamaño de la fuente")
+  }
+
+  onEdit(student: Student): void{
+    this.editingStudentId = student.id;
+    this.studentForm.patchValue({
+      name: student.name,
+      lastName: student.lastName,
+      age: student.age,
+      active: student.active
+    })
   }
 
 }
