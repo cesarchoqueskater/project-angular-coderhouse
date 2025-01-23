@@ -11,9 +11,10 @@
     </mat-drawer>
   
     <div class="example-sidenav-content">
-      <button type="button" mat-button (click)="drawer.toggle()">
-        Toggle sidenav
-      </button>
+      <app-toolbar (drawerToggle) = "drawer.toggle()"/> 
+      <main style="padding: 1.5rem">
+        <app-students/>
+      </main>
     </div>
   
   </mat-drawer-container>
