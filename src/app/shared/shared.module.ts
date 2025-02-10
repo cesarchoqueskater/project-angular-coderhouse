@@ -4,7 +4,7 @@ import { FullNamePipe } from './pipes/full-name.pipe';
 import { HighlightDirective } from './directives/highlight.directive';
 import { MultiplyDirective } from './directives/multiply.directive';
 import { FontsizeDirective } from './directives/fontsize.directive';
-
+import { MatListModule } from '@angular/material/list';
 
 
 @NgModule({
@@ -12,11 +12,11 @@ import { FontsizeDirective } from './directives/fontsize.directive';
     FullNamePipe,
     HighlightDirective,
     MultiplyDirective,
-    FontsizeDirective
+    FontsizeDirective,
   ],
   imports: [
     CommonModule
   ],
-  exports: [FullNamePipe,HighlightDirective, MultiplyDirective,FontsizeDirective]
+  exports: [FullNamePipe,HighlightDirective, MultiplyDirective,FontsizeDirective,MatListModule]
 })
 export class SharedModule { }
