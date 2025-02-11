@@ -37,4 +37,4 @@ import { StudentDetailComponent } from './pages/student-detail/student-detail.co
 })
 export class StudentsModule {
 
- }
+}

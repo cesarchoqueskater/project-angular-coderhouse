@@ -1,7 +1,8 @@
-import { Component,model } from '@angular/core';
+import { Component,model, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Student } from './models';
 import { generateRandomString } from '../../../../shared/utils';
+import { StudentsService } from '../../../../core/services/students.service';
 
 @Component({
   selector: 'app-students',
@@ -10,7 +11,7 @@ import { generateRandomString } from '../../../../shared/utils';
   templateUrl: './students.component.html',
   styleUrl: './students.component.css'
 })
-export class StudentsComponent {
+export class StudentsComponent implements OnInit{
 
   studentForm: FormGroup;
 
@@ -31,13 +32,36 @@ export class StudentsComponent {
   editingStudentId : string | null = null;
 
 
-  constructor( private fb: FormBuilder ){
+  isLoading = false;
+  hasError = false;
+
+  constructor( private fb: FormBuilder,
+    //private matDialog: MatDialog,
+    private studentsService: StudentsService
+   ){
     this.studentForm = this.fb.group({
       name: [null, [Validators.required]],
       lastName: [null, [Validators.required]],
       age: [null, [Validators.required , Validators.max(99)]],
       active: [true]
     })
+  }
+
+  ngOnInit(): void {
+
+    this.isLoading = true;
+    // Se ejecuta despues del constructor, al iniciar el component 
+    this.studentsService.getStudentsPromise().then( (students) => {
+      this.students = students
+      this.hasError = false;
+    } )
+    .catch( (error) => {
+      this.hasError = true;
+      console.error(error)
+    })
+    .finally( () => {
+        this.isLoading = false;
+    } );
   }
 
   get ageValidation() {
