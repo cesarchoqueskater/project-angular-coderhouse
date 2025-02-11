@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Student } from './models';
 import { generateRandomString } from '../../../../shared/utils';
 import { StudentsService } from '../../../../core/services/students.service';
-import { Subscription } from 'rxjs';
+import { first, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-students',
@@ -61,7 +61,11 @@ export class StudentsComponent implements OnInit, OnDestroy{
 
   loadStudentsFromObs(): void{
     this.isLoading = true;
-    this.studentsSubscription = this.studentsService.getStudentsObservable().subscribe({
+    this.studentsSubscription = this.studentsService.getStudentsObservable()
+    .pipe(
+      first()
+    )
+    .subscribe({
       next: (students) => {
         console.log('Recibimos data: ', students)
         this.students = [...students];
