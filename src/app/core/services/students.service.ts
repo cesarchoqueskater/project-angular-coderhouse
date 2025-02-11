@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Student } from "../../modules/dashboard/pages/students/models";
 import { generateRandomString } from "../../shared/utils";
-import { Observable } from "rxjs";
+import { interval, Observable, of, delay } from "rxjs";
 
 @Injectable({ providedIn: 'root' })
 export class StudentsService {
@@ -93,5 +93,23 @@ export class StudentsService {
                 //subscriber.complete() 
             } ,1000)
         })
+    }
+
+    getInterval(): Observable<number>{
+        return interval(1000)
+    }
+
+    getRoles(): Observable<string[]>{
+        return of([
+            'ADMING',
+            'STUDENT',
+            'SELLER'
+        ]).pipe(delay(1000))
+    }
+
+    getFruit(): Observable<string[]>{
+        return of ([
+            'Manzanas', 'Bananas','Peras'
+        ]).pipe(delay(3000))
     }
 }
