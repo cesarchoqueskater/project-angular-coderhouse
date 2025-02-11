@@ -37,9 +37,33 @@ export class StudentsService {
 
     getStudentsObservable(): Observable<Student[]>{
         return new Observable<Student[]>((subscriber) => {
+            
+            const students = [
+                {
+                    id: generateRandomString(6),
+                    name: 'Cesar',
+                    lastName: 'Choquehuanca',
+                    age: 28,
+                    active: true
+                },
+                {
+                    id: generateRandomString(6),
+                    name: 'Ryan',
+                    lastName: 'Sheckler',
+                    age: 28,
+                    active: true
+                }
+            ]
 
-            setTimeout( () => {
-                
+            setInterval( () => {
+                students.push({
+                    id: generateRandomString(6),
+                    name: 'Nuevo Estudiante',
+                    lastName: 'Apellido',
+                    age: 20,
+                    active: false
+                })
+                /*
                 subscriber.next(
                     [
                         {
@@ -58,13 +82,16 @@ export class StudentsService {
                         }
                     ]
                 )
+                */
                 
+                subscriber.next(students)
+
                 //Mandar error
                 //subscriber.error('Error al cargar los estudiantes ...') 
                 
                 //Notifica al subscriptor que el observable ya no va a admitir mas data
-                subscriber.complete() 
-            } ,3000)
+                //subscriber.complete() 
+            } ,1000)
         })
     }
 }

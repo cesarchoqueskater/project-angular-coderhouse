@@ -1,8 +1,9 @@
-import { Component,model, OnInit } from '@angular/core';
+import { Component,model, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Student } from './models';
 import { generateRandomString } from '../../../../shared/utils';
 import { StudentsService } from '../../../../core/services/students.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-students',
@@ -11,7 +12,7 @@ import { StudentsService } from '../../../../core/services/students.service';
   templateUrl: './students.component.html',
   styleUrl: './students.component.css'
 })
-export class StudentsComponent implements OnInit{
+export class StudentsComponent implements OnInit, OnDestroy{
 
   studentForm: FormGroup;
 
@@ -35,6 +36,8 @@ export class StudentsComponent implements OnInit{
   isLoading = false;
   hasError = false;
 
+  studentsSubscription?: Subscription;
+
   constructor( private fb: FormBuilder,
     //private matDialog: MatDialog,
     private studentsService: StudentsService
@@ -46,6 +49,10 @@ export class StudentsComponent implements OnInit{
       active: [true]
     })
   }
+  ngOnDestroy(): void {
+    // Sale de la vista
+    this.studentsSubscription?.unsubscribe()
+  }
 
   ngOnInit(): void {
     // this.loadStudentsFromPromise()
@@ -53,9 +60,12 @@ export class StudentsComponent implements OnInit{
   }
 
   loadStudentsFromObs(): void{
-    this.studentsService.getStudentsObservable().subscribe({
+    this.isLoading = true;
+    this.studentsSubscription = this.studentsService.getStudentsObservable().subscribe({
       next: (students) => {
-        this.students = students;
+        console.log('Recibimos data: ', students)
+        this.students = [...students];
+        this.isLoading = false;
       },
       error: (error) => {
         alert(error);
@@ -63,7 +73,7 @@ export class StudentsComponent implements OnInit{
         this.isLoading = false;
       },
       complete: () => {
-        this.isLoading = false;
+        //this.isLoading = false;
       }
     })
   }
