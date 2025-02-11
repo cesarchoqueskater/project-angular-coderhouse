@@ -16,9 +16,10 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 
 import { ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '../../../../shared/shared.module';
+import { StudentDetailComponent } from './pages/student-detail/student-detail.component';
 
 @NgModule({
-  declarations: [StudentsComponent],
+  declarations: [StudentsComponent, StudentDetailComponent],
   imports: [
     CommonModule,
     StudentsRoutingModule,

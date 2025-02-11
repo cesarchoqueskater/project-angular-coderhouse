@@ -82,6 +82,7 @@
     <ng-container matColumnDef="actions">
         <th mat-header-cell *matHeaderCellDef appFontsize> Actions </th>
         <td mat-cell *matCellDef="let element">
+            <button [routerLink]="element.id" mat-icon-button> <mat-icon>visibility</mat-icon> </button>
             <button (click)="onEdit(element)" mat-icon-button> <mat-icon>edit_note</mat-icon> </button>
             <button (click)="onDelete(element.id)" mat-icon-button> <mat-icon>delete</mat-icon> </button>
         </td>
