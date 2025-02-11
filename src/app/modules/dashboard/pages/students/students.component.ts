@@ -48,7 +48,27 @@ export class StudentsComponent implements OnInit{
   }
 
   ngOnInit(): void {
+    // this.loadStudentsFromPromise()
+    this.loadStudentsFromObs();
+  }
 
+  loadStudentsFromObs(): void{
+    this.studentsService.getStudentsObservable().subscribe({
+      next: (students) => {
+        this.students = students;
+      },
+      error: (error) => {
+        alert(error);
+        this.hasError = true;
+        this.isLoading = false;
+      },
+      complete: () => {
+        this.isLoading = false;
+      }
+    })
+  }
+
+  loadStudentsFromPromise(): void{
     this.isLoading = true;
     // Se ejecuta despues del constructor, al iniciar el component 
     this.studentsService.getStudentsPromise().then( (students) => {
