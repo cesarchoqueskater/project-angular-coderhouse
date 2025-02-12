@@ -14,12 +14,13 @@ import { HomeComponent } from './pages/home/home.component';
 import { NavMenuComponent } from './components/nav-menu/nav-menu.component';
 import { SharedModule } from '../../shared/shared.module';
 
+
 @NgModule({
   declarations: [
     DashboardComponent,
     ToolbarComponent,
     HomeComponent,
-    NavMenuComponent
+    NavMenuComponent,
   ],
   imports: [
     CommonModule,

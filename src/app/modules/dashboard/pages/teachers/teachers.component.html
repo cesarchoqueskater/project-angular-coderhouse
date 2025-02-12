@@ -1,1 +1,18 @@
-<p>teachers works!</p>
+<h3>Teachers</h3>
+
+@if (isLoading){
+    
+    <mat-spinner/>
+
+}@else {
+    
+    <button (click)="openFormDialog()" mat-flat-button>
+        Create Teacher
+    </button>
+    <app-teachers-table 
+    [dataSource]="dataSource" 
+    (delete)="onDelete($event)"
+    (edit)="openFormDialog($event)"
+    />
+
+}

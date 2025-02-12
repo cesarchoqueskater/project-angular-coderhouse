@@ -12,19 +12,28 @@ export class NavMenuComponent {
 
   linkItems : { label: string; routerLink: string }[] = [
     {
-      label: 'Inicio',
+      label: 'Home',
       routerLink: 'home',
     }    
     ,
     {
-      label: 'Estudiantes',
+      label: 'Students',
       routerLink: 'students',
     }    
     ,
     {
-      label: 'Cursos',
-      routerLink: 'courses',
+      label: 'Class',
+      routerLink: 'class-students',
     }    
+    ,
+    {
+      label: 'Course',
+      routerLink: 'courses',
+    },
+    {
+      label: 'Teacher',
+      routerLink: 'teachers',
+    }
   ];
 
   constructor( private router: Router){
