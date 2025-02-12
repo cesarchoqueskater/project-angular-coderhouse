@@ -1,0 +1,18 @@
+<h3>Cursos</h3>
+
+@if (isLoading){
+    
+    <mat-spinner/>
+
+}@else {
+    
+    <button (click)="openFormDialog()" mat-flat-button>
+        Crear Curso
+    </button>
+    <app-courses-table 
+    [dataSource]="dataSource" 
+    (delete)="onDelete($event)"
+    (edit)="openFormDialog($event)"
+    />
+
+}

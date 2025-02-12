@@ -10,6 +10,23 @@ import { Router } from '@angular/router';
 })
 export class NavMenuComponent {
 
+  linkItems : { label: string; routerLink: string }[] = [
+    {
+      label: 'Inicio',
+      routerLink: 'home',
+    }    
+    ,
+    {
+      label: 'Estudiantes',
+      routerLink: 'students',
+    }    
+    ,
+    {
+      label: 'Cursos',
+      routerLink: 'courses',
+    }    
+  ];
+
   constructor( private router: Router){
   };
 

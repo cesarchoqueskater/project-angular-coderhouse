@@ -6,6 +6,19 @@ import { MultiplyDirective } from './directives/multiply.directive';
 import { FontsizeDirective } from './directives/fontsize.directive';
 import { MatListModule } from '@angular/material/list';
 
+import { MatTableModule } from '@angular/material/table';
+
+import { MatButtonModule } from '@angular/material/button';
+
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+
+import { MatIconModule } from '@angular/material/icon';
+
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { ReactiveFormsModule } from '@angular/forms';
+
 
 @NgModule({
   declarations: [
@@ -17,6 +30,6 @@ import { MatListModule } from '@angular/material/list';
   imports: [
     CommonModule
   ],
-  exports: [FullNamePipe,HighlightDirective, MultiplyDirective,FontsizeDirective,MatListModule]
+  exports: [FullNamePipe,HighlightDirective, ReactiveFormsModule,MultiplyDirective,FontsizeDirective,MatListModule,MatTableModule,MatButtonModule, MatProgressSpinnerModule, MatIconModule,MatDialogModule, MatFormFieldModule, MatInputModule]
 })
 export class SharedModule { }
