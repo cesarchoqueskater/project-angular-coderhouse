@@ -1,5 +1,5 @@
 export interface ClassStudents{
     id: string;
-    className: string;
+    classStudentName: string;
     quantity: number;
 }

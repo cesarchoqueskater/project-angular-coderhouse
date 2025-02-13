@@ -24,11 +24,13 @@ export class ClassStudentsFormDialogComponent {
     @Inject(MAT_DIALOG_DATA) private data: ClassStudentsFormDialogData
     ){
       this.clasStudentForm = this.fb.group({
-        className: ['', Validators.required],
+        classStudentName: ['', Validators.required],
         quantity: ['', Validators.required],
       })
-
+      //console.log("valor 1" ,data);
+      //console.log("valor 2" ,data.editingClassStudent);
     if(!!data && !!data.editingClassStudent) {
+      //console.log("Entro a patchValue")
       this.clasStudentForm.patchValue(data.editingClassStudent)
     }
   }

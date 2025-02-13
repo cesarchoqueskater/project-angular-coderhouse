@@ -26,21 +26,21 @@ export class ClassStudentsComponent implements OnInit{
     this.dataSource = [...data]
   }
 
-  openFormDialog(editingClassStudents?: ClassStudents) : void{
+  openFormDialog(editingClassStudent?: ClassStudents) : void{
 
-    if ( editingClassStudents ) {
-      console.log('Se procede a editar la clase ',editingClassStudents);
+    if ( editingClassStudent ) {
+      console.log('Se procede a editar la clase ',editingClassStudent);
     }
 
-    this.matDialog.open(ClassStudentsFormDialogComponent, {data: { editingClassStudents }})
+    this.matDialog.open(ClassStudentsFormDialogComponent, {data: { editingClassStudent }})
     .afterClosed()
     .subscribe({
       next: (data) => {
         console.log(data)
         if(!!data){
-          if(!!editingClassStudents){
+          if(!!editingClassStudent){
             //Update
-            this.updateClassStudents(editingClassStudents.id, data)
+            this.updateClassStudents(editingClassStudent.id, data)
           }else{
             this.addClassStudents(data)
           }
@@ -49,7 +49,8 @@ export class ClassStudentsComponent implements OnInit{
     })
   }
 
-  updateClassStudents(id: string, data: { className:string, quantity:number }){
+  updateClassStudents(id: string, data: { classStudentName: string, quantity:number }){
+    
     this.isLoading = true;
     this.ClassStudentsService.updateClassStudentById(id, data).subscribe({
       next: (data) => this.handleClassStudentsUpdate(data),
@@ -63,7 +64,7 @@ export class ClassStudentsComponent implements OnInit{
   }
 
   
-  addClassStudents(data: { className:string, quantity:number }): void{
+  addClassStudents(data: { classStudentName:string, quantity:number }): void{
     this.isLoading = true;
     this.ClassStudentsService.addClassStudent(data).subscribe({
       next: (data) => this.handleClassStudentsUpdate(data),

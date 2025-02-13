@@ -7,32 +7,32 @@ import { ClassStudents } from "../../modules/dashboard/pages/class-students/mode
 let MY_FAKE_DATABASE: ClassStudents[] = [
         {
             id: generateRandomString(10),
-            className: 'Japanese',
-            quantity: 20
+            classStudentName: 'Japanese',
+            quantity: 20,
             //active: true
         },
         {
             id: generateRandomString(10),
-            className: 'Korean',
-            quantity: 23
+            classStudentName: 'Korean',
+            quantity: 23,
             //active: true
         },
         {
             id: generateRandomString(10),
-            className: 'English',
-            quantity: 53
+            classStudentName: 'English',
+            quantity: 53,
             //active: true
         },
         {
             id: generateRandomString(10),
-            className: 'German',
-            quantity: 4
+            classStudentName: 'German',
+            quantity: 4,
             //active: false
         },
         {
             id: generateRandomString(10),
-            className: 'French',
-            quantity: 5
+            classStudentName: 'French',
+            quantity: 5,
             //active: false
         }
     ]
@@ -40,14 +40,14 @@ let MY_FAKE_DATABASE: ClassStudents[] = [
 @Injectable({ providedIn: 'root' })
 export class ClassStudentsService {
 
-    updateClassStudentById(id:string, data: { className:string, quantity:number }) : Observable<ClassStudents[]>{
+    updateClassStudentById(id:string, data: { classStudentName: string, quantity: number }) : Observable<ClassStudents[]>{
         MY_FAKE_DATABASE = MY_FAKE_DATABASE.map( (classStudent) => 
             classStudent.id === id ? { ...classStudent, ...data } : classStudent 
         );
         return this.getClassStudents();
     }
 
-    addClassStudent( payload: { className:string, quantity:number } ): Observable<ClassStudents[]>{
+    addClassStudent( payload: { classStudentName:string, quantity:number } ): Observable<ClassStudents[]>{
 
         MY_FAKE_DATABASE.push({
             ...payload,

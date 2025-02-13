@@ -18,5 +18,5 @@ export class ClassStudentsTableComponent {
   @Output()
   edit = new EventEmitter<ClassStudents>()
 
-  displayedColumns = ['id','className','quantity']; 
+  displayedColumns = ['id','classStudentName','quantity','actions']; 
 }
