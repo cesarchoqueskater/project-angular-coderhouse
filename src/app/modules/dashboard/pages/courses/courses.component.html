@@ -1,4 +1,4 @@
-<h3>Cursos</h3>
+<h3>Course</h3>
 
 @if (isLoading){
     
@@ -7,7 +7,7 @@
 }@else {
     
     <button (click)="openFormDialog()" mat-flat-button>
-        Crear Curso
+        Create Course
     </button>
     <app-courses-table 
     [dataSource]="dataSource" 

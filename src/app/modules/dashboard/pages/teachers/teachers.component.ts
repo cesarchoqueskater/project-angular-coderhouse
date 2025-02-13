@@ -4,8 +4,6 @@ import { Teachers } from './models';
 import { MatDialog } from '@angular/material/dialog';
 import { TeacherFormDialogComponent } from './components/teacher-form-dialog/teacher-form-dialog.component';
 
-
-
 @Component({
   selector: 'app-teachers',
   standalone: false,
@@ -15,7 +13,7 @@ import { TeacherFormDialogComponent } from './components/teacher-form-dialog/tea
 })
 export class TeachersComponent implements OnInit{
 
- isLoading = false;
+  isLoading = false;
 
   dataSource: Teachers[] = [];
 

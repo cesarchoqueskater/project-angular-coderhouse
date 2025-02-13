@@ -1,9 +1,5 @@
-export interface ClassStudent{
+export interface ClassStudents{
     id: string;
-    name: string;
-    lastName: string;
-    age: string;
-    email: string;
-    active: boolean;
-
+    className: string;
+    quantity: number;
 }

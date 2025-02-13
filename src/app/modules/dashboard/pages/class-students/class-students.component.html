@@ -1,1 +1,18 @@
-<p>class-students works! AQUIII</p>
+<h3>Class Students</h3>
+
+@if (isLoading){
+    
+    <mat-spinner/>
+
+}@else {
+    
+    <button (click)="openFormDialog()" mat-flat-button>
+        Create Class Students
+    </button>
+    <app-class-students-table
+    [dataSource]="dataSource" 
+    (delete)="onDelete($event)"
+    (edit)="openFormDialog($event)"
+    />
+
+}

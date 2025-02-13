@@ -1,4 +1,8 @@
-import { Component } from '@angular/core';
+import { Component,OnInit } from '@angular/core';
+import { ClassStudentsService } from '../../../../core/services/class-students.service';
+import { ClassStudents } from './models';
+import { MatDialog } from '@angular/material/dialog';
+import { ClassStudentsFormDialogComponent } from './components/class-students-form-dialog/class-students-form-dialog.component';
 
 @Component({
   selector: 'app-class-students',
@@ -7,6 +11,106 @@ import { Component } from '@angular/core';
   templateUrl: './class-students.component.html',
   styleUrl: './class-students.component.css'
 })
-export class ClassStudentsComponent {
+export class ClassStudentsComponent implements OnInit{
+
+  isLoading = false;
+
+  dataSource: ClassStudents[] = [];
+
+  constructor( 
+    private ClassStudentsService: ClassStudentsService,
+    private matDialog: MatDialog
+  ) {}
+
+  handleClassStudentsUpdate(data: ClassStudents[]): void{
+    this.dataSource = [...data]
+  }
+
+  openFormDialog(editingClassStudents?: ClassStudents) : void{
+
+    if ( editingClassStudents ) {
+      console.log('Se procede a editar la clase ',editingClassStudents);
+    }
+
+    this.matDialog.open(ClassStudentsFormDialogComponent, {data: { editingClassStudents }})
+    .afterClosed()
+    .subscribe({
+      next: (data) => {
+        console.log(data)
+        if(!!data){
+          if(!!editingClassStudents){
+            //Update
+            this.updateClassStudents(editingClassStudents.id, data)
+          }else{
+            this.addClassStudents(data)
+          }
+        }
+      }
+    })
+  }
+
+  updateClassStudents(id: string, data: { className:string, quantity:number }){
+    this.isLoading = true;
+    this.ClassStudentsService.updateClassStudentById(id, data).subscribe({
+      next: (data) => this.handleClassStudentsUpdate(data),
+      error: () => {
+        this.isLoading = false;
+      },
+      complete: () => {
+        this.isLoading = false
+      }
+    })
+  }
+
+  
+  addClassStudents(data: { className:string, quantity:number }): void{
+    this.isLoading = true;
+    this.ClassStudentsService.addClassStudent(data).subscribe({
+      next: (data) => this.handleClassStudentsUpdate(data),
+      error: () => {
+        this.isLoading = false;
+      },
+      complete: () => {
+        this.isLoading = false
+      }
+    }
+  )
+  }
+
+
+  ngOnInit(): void {
+
+    this.isLoading = true;
+    this.ClassStudentsService.getClassStudents().subscribe({
+    next: (data) => {
+      this.dataSource = [...data];
+    },
+    error: () => {
+      this.isLoading = false;
+    },
+    complete: () => {
+      this.isLoading = false
+    }
+   })
+  }
+
+
+  onDelete(id: string) : void{
+    if (confirm("Estas seguro de eliminar la clase")){
+      this.isLoading = true;
+      this.ClassStudentsService.deleteClassStudentById(id).subscribe({
+        next: (data) => {
+          console.log('Data ha sido actualizada', data);
+          this.handleClassStudentsUpdate(data);
+        },
+        error: () => {
+          this.isLoading = false;
+        },
+        complete: () => {
+          this.isLoading = false
+        }
+      })
+    } 
+  }
 
 }
