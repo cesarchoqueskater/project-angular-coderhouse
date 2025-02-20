@@ -4,6 +4,8 @@ import { Course } from './models';
 import { MatDialog } from '@angular/material/dialog';
 import { CourseFormDialogComponent } from './components/course-form-dialog/course-form-dialog.component';
 
+import { AuthService } from '../../../../core/services/auth.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-courses',
@@ -12,6 +14,7 @@ import { CourseFormDialogComponent } from './components/course-form-dialog/cours
   templateUrl: './courses.component.html',
   styleUrl: './courses.component.css'
 })
+
 export class CoursesComponent implements OnInit{
 
   isLoading = false;
@@ -19,10 +22,15 @@ export class CoursesComponent implements OnInit{
 
   dataSource: Course[] = [];
 
+  isAdmin$: Observable<boolean>;
+
   constructor( 
     private CourseService: CourseService,
-    private matDialog: MatDialog
-  ) {}
+    private matDialog: MatDialog,
+    private authService: AuthService
+  ) {
+    this.isAdmin$ = this.authService.isAdmin$;
+  }
 
   handleCourseUpdate(data: Course[]): void{
     this.dataSource = [...data]
@@ -101,7 +109,7 @@ export class CoursesComponent implements OnInit{
       this.isLoading = true;
       this.CourseService.deleteCourseById(id).subscribe({
         next: (data) => {
-          console.log('Data ha sido actualizada', data);
+          //console.log('Data ha sido actualizada', data);
           this.handleCourseUpdate(data);
         },
         error: () => {

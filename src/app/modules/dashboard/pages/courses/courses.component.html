@@ -6,7 +6,7 @@
 
 }@else {
     
-    <button (click)="openFormDialog()" mat-flat-button>
+    <button (click)="openFormDialog()"  [disabled]="!(isAdmin$ | async)" mat-flat-button>
         Create Course
     </button>
     <app-courses-table 

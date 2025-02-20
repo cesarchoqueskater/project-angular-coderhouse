@@ -20,6 +20,9 @@ import { MatInputModule } from '@angular/material/input';
 import { ReactiveFormsModule } from '@angular/forms';
 
 
+import { MatCardModule } from '@angular/material/card';
+
+
 @NgModule({
   declarations: [
     FullNamePipe,
@@ -30,6 +33,6 @@ import { ReactiveFormsModule } from '@angular/forms';
   imports: [
     CommonModule
   ],
-  exports: [FullNamePipe,HighlightDirective, ReactiveFormsModule,MultiplyDirective,FontsizeDirective,MatListModule,MatTableModule,MatButtonModule, MatProgressSpinnerModule, MatIconModule,MatDialogModule, MatFormFieldModule, MatInputModule]
+  exports: [FullNamePipe,HighlightDirective, ReactiveFormsModule,MultiplyDirective,FontsizeDirective,MatListModule,MatTableModule,MatButtonModule, MatProgressSpinnerModule, MatIconModule,MatDialogModule, MatFormFieldModule, MatInputModule, MatCardModule]
 })
 export class SharedModule { }

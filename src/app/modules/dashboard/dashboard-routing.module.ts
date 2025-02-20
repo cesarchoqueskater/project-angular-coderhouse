@@ -3,6 +3,11 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './pages/home/home.component';
 import { ClassStudentsModule } from './pages/class-students/class-students.module';
 
+
+import { authGuard } from '../../core/guards/auth.guards';
+import { adminGuard } from '../../core/guards/admin.guard';
+
+
 const routes: Routes = [
 
   /**
@@ -31,6 +36,12 @@ const routes: Routes = [
   {
     path: "teachers",
     loadChildren: () => import('./pages/teachers/teachers.module' ).then((m) => m.TeachersModule),
+  },
+  {
+    path: 'users',
+    canActivate: [adminGuard],
+    loadChildren: () =>
+      import('./pages/users/users.module').then((m) => m.UsersModule),
   },
 
 ];
