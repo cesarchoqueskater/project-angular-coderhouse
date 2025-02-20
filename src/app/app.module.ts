@@ -7,6 +7,9 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { DashboardModule } from './modules/dashboard/dashboard.module';
 import { MatToolbarModule } from '@angular/material/toolbar';
 
+// import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withFetch } from '@angular/common/http';
+
 @NgModule({
   declarations: [
     AppComponent
@@ -18,7 +21,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     MatToolbarModule
   ],
   providers: [
-    provideAnimationsAsync()
+    provideAnimationsAsync(), provideHttpClient(withFetch())
   ],
   bootstrap: [AppComponent]
 })

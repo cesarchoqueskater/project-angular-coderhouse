@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
 const FAKE_USERS_DB: User[] = [
   {
     id: generateRandomString(6),
-    email: 'admin@email.com',
+    email: 'admin@gmail.com',
     password: 'adminnadmin',
     name: 'Administrador',
     accessToken: 'hryqwfn1221jhjhf84hjfsfsdft4523hfdjhfs',

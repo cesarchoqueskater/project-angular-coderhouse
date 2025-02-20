@@ -1,0 +1,35 @@
+{
+    "courses": [
+        {
+            "id": "svDFs3ewq",
+            "name": "English"
+        },
+        {
+            "id": "svDreFj3",
+            "name": "Japanse"
+        },
+        {
+            "id": "a9c9cvr",
+            "name": "Korean"
+        },
+        {
+            "id": "d1gft71d",
+            "name": "French"
+        },
+        {
+            "id": "d71067d",
+            "name": "German"
+        }
+    ],
+    "teachers": [
+        {
+            "id": "sdjv4",
+            "name": "Kakashi",
+            "lastName": "Sensei",
+            "age": "10",
+            "email": "teacher@gmail.com",
+            "course": "string",
+            "courseId": "a9c9"
+        }
+    ]
+}
